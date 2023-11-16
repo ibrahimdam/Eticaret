@@ -1,0 +1,75 @@
+﻿@model ProductListViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Admin Ürünler Sayfası</h1>
+        <hr />
+        <a href="/admin/products/create" class="btn btn-primary btn-sm"> Ürün Ekle </a>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr class="fw-bold">
+                    <td style="width:30px">Id</td>
+                    <td style="width:100px">Fotoğraf</td>
+                    <td>Ürün Adı</td>
+                    <td style ="width:90px">Fiyatı</td>
+                    <td style ="width:30px">Anasayfa</td>
+                    <td style ="width:30px">Onaylı Mı?</td>
+                    <td style="width:150px"> </td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Products.Count() > 0)
+                {
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>@product.Id</td>
+                            <td>
+                                <img src="~/images/@product.ImageUrl" alt="@product.Name" width="80px" />
+                            </td>
+                            <td>@product.Name</td>
+                            <td>@product.Price ₺</td>
+                            <td class="text-center">
+                                @if (product.IsHome)
+                                {
+                                    <i class="bi bi-check-circle" style="font-size: 30px; color:green"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-x-circle" style="font-size: 30px; color:red;"></i>
+
+                                }
+
+                            </td>
+                            <td class="text-center">
+                                @if (product.IsApproved)
+                                {
+                                    <i class="bi bi-check-circle" style="font-size: 30px; color:green;"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-x-circle" style="font-size: 30px; color:red;"></i>
+
+                                }
+                            </td>
+                            <td>
+                                <a href="/admin/products/@product.Id" class="btn btn-warning btn-sm"><i class="bi bi-card-list"></i></a>
+                                <form action="/admin/deleteproduct" method="post" >
+                                    <input type="hidden" name="Id" value="@product.Id" />
+                                    <button style="display:inline;" type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <h3>Listelenecek ürün bulunamadı.</h3>
+                    </div>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

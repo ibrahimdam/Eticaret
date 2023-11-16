@@ -1,0 +1,41 @@
+﻿@model ProductListViewModel
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("Categories")
+
+        <partial name="_search" />
+    </div>
+
+    <div class="col-md-9">
+        <h3>Arama sonuçlarınız:</h3>
+        <hr />
+        <div class="row">
+            @if (Model.Products.Count() > 0)
+            {
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4">
+                        <partial name="_product" model="product" />
+                    </div>
+                }
+            }
+            else
+            {
+                <p> Aradığınız kriterlere uygun ürün bulunamadı.</p>
+            }
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+

@@ -1,0 +1,100 @@
+﻿@model ProductModel
+
+<h1>Ürün Güncelle</h1>
+<hr />
+
+<form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <input type="hidden" value="@Model.Id" name="Id" />
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Name"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Name" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Description"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Description" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Price"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Price" />
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Url"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Url" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="ImageUrl"></label>
+                <div class="col-sm-10">
+                    @*<input class="form-control" asp-for="ImageUrl" />*@
+                    <input type="hidden" asp-for="ImageUrl"/>
+                    <img src="~/images/@Model.ImageUrl" width="80px" alt="" />
+                    <input type="file" name="file" />
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="IsApproved" class="form-check-input" type="checkbox" id="IsApproved">
+                <label asp-for="IsApproved" class="form-check-label" for="IsApproved"></label>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="IsHome" class="form-check-input" type="checkbox" id="IsHome">
+                <label asp-for="IsHome" class="form-check-label" for="IsHome"></label>
+            </div>
+            <div class="form-group row mb-3">
+                <div class="col-sm-10 offset-sm-5">
+                    <button type="submit" class="btn btn-warning btn-sm">Güncelle</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>Kategoriler</h5>
+            <hr />
+            @for (int i = 0; i < Model.SelectedCategories.Count; i++)
+            {
+                <input type="hidden" name="SelectedCategories[@i].Id" value="@Model.SelectedCategories[@i].Id" />
+                <input type="hidden" name="SelectedCategories[@i].Name" value="@Model.SelectedCategories[@i].Name" />
+                <input type="hidden" name="SelectedCategories[@i].Url" value="@Model.SelectedCategories[@i].Url" />
+                <input type="hidden" name="SelectedCategories[@i].ProductCategories" value="@Model.SelectedCategories[@i].ProductCategories" />
+
+            }
+
+            @foreach (var category in (List<Category>)ViewBag.Categories)
+            {
+                <div>
+                    <input 
+                        type="checkbox" 
+                        class=""
+                        id="category_@category.Id"
+                        name="categoryIds"
+                        value="@category.Id" 
+                        @(Model.SelectedCategories.Any(x=> x.Id==category.Id)?"checked":"")/>
+                    <label for="category_@category.Id">@category.Name </label>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+
+</form>
+

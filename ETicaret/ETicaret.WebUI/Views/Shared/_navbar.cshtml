@@ -1,0 +1,75 @@
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ETicaret.WebUI</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a href="/products" class="nav-link text-dark">Ürünler</a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Customer"))
+                    {
+                        
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Sepetim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Siparişlerim</a>
+                    </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ProductList">Admin Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CategoryList">Admin Kategori</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="RoleList">Roller</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="UserList">Kullanıcılar</a>
+                        </li>
+                    }
+                }
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About"> Hakkımızda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact"> İletişim</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a href="/account/manage" class="nav-link text-dark"> @User.Identity.Name </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link text-dark"> Çıkış </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link text-dark"> Kaydol </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link text-dark"> Giriş </a>
+                    </li>
+                }
+
+
+
+            </ul>
+        </div>
+    </div>
+</nav>

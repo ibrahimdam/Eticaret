@@ -1,0 +1,10 @@
+- Þifremi Unuttum sayfasý 29 Mayýsa biterse sevinirim.
+	Login sayfasýna bir link eklenecek. Þifremi unuttum..
+	- Açýlan View'de email adresi girilecek.
+	- Email'e göre User sorgulanacak ve User var ise token ve userId ile kullanýcýya link gönderilecek.(Register actionda olduðu gibi.)
+	- Emaildeki link týklandýðýnda da Þifre yenile diye bir action karþýlayacak. Eðer token ve userýd doðru ise (EmailConfirm action) Bir tane View açacak.
+	- Açýlan View'de de yeni þifre girilecek. Ve veritabanýna kaydedilecek. Login ekranýna yönlendirilebilir.
+
+
+
+- Profilim sayfasý da yapýlmalý..

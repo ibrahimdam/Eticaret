@@ -1,0 +1,40 @@
+﻿@model ProductDetailModel
+
+<div class="row">
+    <div class="col-md-3">
+        <img style="height:300px" src="~/images/@Model.Product.ImageUrl" alt="" class="img-fluid" />
+    </div>
+    <div class="col-md-9">
+        <h1>@Model.Product.Name</h1>
+        <hr />
+        @foreach (var category in Model.Categories)
+        {
+             <a asp-controller="Product"
+             asp-action="List"
+           asp-route-category="@category.Url"
+               class="btn btn-link p-0 mb-3">@category.Name </a>
+        }
+       
+
+        <div class="mb-3">
+            <h4 class="text-primary mb-3">
+                @Model.Product.Price ₺
+            </h4>
+              <form asp-controller="Cart" asp-action="AddToCart" method="post" class="form-inline">
+            <input type="hidden" value="@Model.Product.Id" name="productId" />
+            <div class="input-group mb-3 w-50">
+                    <input type="number" min="1" max="10" step="1" class="form-control" value="1" name="quantity">
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-bag"></i> Sepete Ekle</button>
+            </div>
+
+            </form>
+        </div>
+
+            
+    </div>
+</div>
+<div class="row">
+    @Model.Product.Description
+
+</div>
+

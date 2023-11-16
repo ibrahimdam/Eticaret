@@ -1,0 +1,116 @@
+﻿@model CategoryModel
+
+<h1>Kategori Güncelle</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+</div>
+<form asp-controller="Admin" asp-action="EditCategory" method="post">
+
+    <div class="row">
+        <div class="col-md-4">
+
+
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Name"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Name" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Url"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Url" />
+                </div>
+            </div>
+
+
+            <div class="form-group row mb-3">
+                <div class="col-sm-10 offset-sm-5">
+                    <button type="submit" class="btn btn-primary btn-sm"> Kaydet </button>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr class="fw-bold">
+                                <td style="width:30px">Id</td>
+                                <td style="width:100px">Fotoğraf</td>
+                                <td>Ürün Adı</td>
+                                <td style="width:90px">Fiyatı</td>
+                                <td style="width:150px"> </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Products != null)
+                            {
+                                @if (Model.Products.Count() > 0)
+                                {
+                                    @for (int i = 0; i < Model.Products.Count(); i++)
+                                    {
+                                        <input type="hidden" name="Products[@i].Id" value="@Model.Products[@i].Id" />
+                                        <input type="hidden" name="Products[@i].ImageUrl" value="@Model.Products[@i].ImageUrl" />
+                                        <input type="hidden" name="Products[@i].Url" value="@Model.Products[@i].Url" />
+                                        <input type="hidden" name="Products[@i].Name" value="@Model.Products[@i].Name" />
+                                        <input type="hidden" name="Products[@i].Description" value="@Model.Products[@i].Description" />
+                                        <input type="hidden" name="Products[@i].Price" value="@Model.Products[@i].Price" />
+                                        <input type="hidden" name="Products[@i].ProductCategories" value="@Model.Products[@i].ProductCategories" />
+                                    }
+
+                                    @foreach (var product in Model.Products)
+                                    {
+                                        <tr>
+                                            <td>@product.Id</td>
+                                            <td>
+                                                <img src="~/images/@product.ImageUrl" alt="@product.Name" width="80px" />
+                                            </td>
+                                            <td>@product.Name</td>
+                                            <td>@product.Price ₺</td>
+                                            <td>
+                                                <a href="/admin/products/@product.Id" class="btn btn-warning btn-sm"><i class="bi bi-card-list"></i></a>
+                                                <form action="/admin/deleteproductfromcategory" method="post">
+                                                    <input type="hidden" name="productId" value="@product.Id" />
+                                                    <input type="hidden" name="categoryId" value="@Model.Id" />
+                                                    <button style="display:inline;" type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-warning">
+                                        <h3>Listelenecek ürün bulunamadı.</h3>
+                                    </div>
+                                }
+                            }
+
+                            @*else
+                            {
+                                <div class="alert alert-warning">
+                                    <h3>Listelenecek ürün bulunamadı.</h3>
+                                </div>
+                            }*@
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+

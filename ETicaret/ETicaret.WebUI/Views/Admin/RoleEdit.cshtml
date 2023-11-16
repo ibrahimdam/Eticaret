@@ -1,0 +1,59 @@
+﻿@model RoleDetails
+<h2>Role Güncelle</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Admin" asp-action="RoleEdit" method="post">
+            <input type="hidden" name="RoleId" value="@Model.Role.Id" />
+            <input type="hidden" name="RoleName" value="@Model.Role.Name" />
+
+            <h6 class="bg-info text-white p-1">@Model.Role.Name Rolü için Kullanıcı Ekle  </h6>
+            <table class="table table-bordered table-sm">
+                @if (Model.NonMembers.Count() == 0)
+                {
+                    <tr colspan="2">
+                        Bütün kullanıcılar @Model.Role.Name Rolüne ait.
+                    </tr>
+                }
+                else
+                {
+                    foreach (var user in Model.NonMembers)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToAddRole" value="@user.Id" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <hr />
+            <h6 class="bg-info text-white p-1">Kullanıcı Çıkar @Model.Role.Name </h6>
+            <table class="table table-bordered table-sm">
+                @if (Model.Members.Count() == 0)
+                {
+                    <tr colspan="2">
+                        @Model.Role.Name Rolüne ait kullanıcı bulunmamaktadır.
+                    </tr>
+                }
+                else
+                {
+                    foreach (var user in Model.Members)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToDeleteRole" value="@user.Id" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <button type="submit" class="btn btn-primary"> Güncelle </button>
+        </form>
+    </div>
+</div>

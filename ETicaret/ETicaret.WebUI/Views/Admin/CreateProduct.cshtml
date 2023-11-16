@@ -1,0 +1,83 @@
+﻿@model ProductModel
+
+<h1>Yeni Ürün Ekle</h1>
+<hr />
+
+<form asp-controller="Admin" asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Name"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Description"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Description" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Price"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Price" />
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="Url"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Url" />
+                </div>
+            </div>
+
+           @* <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="ImageUrl"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="ImageUrl" />
+                </div>
+            </div>*@
+            <div class="form-group row mb-3">
+                <label class="col-sm-2 col-form-label" asp-for="ImageUrl"></label>
+                <div class="col-sm-10">
+                    <input type="hidden" asp-for="ImageUrl" /> 
+                    <input type="file" name="file" />
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="IsApproved" class="form-check-input" type="checkbox" id="IsApproved">
+                <label asp-for="IsApproved" class="form-check-label" for="IsApproved"></label>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="IsHome" class="form-check-input" type="checkbox" id="IsHome">
+                <label asp-for="IsHome" class="form-check-label" for="IsHome"></label>
+            </div>
+
+
+
+
+            <div class="form-group row mb-3">
+                <div class="col-sm-10 offset-sm-5">
+                    <button type="submit" class="btn btn-primary btn-sm"> Kaydet </button>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+

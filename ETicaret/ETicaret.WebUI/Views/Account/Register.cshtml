@@ -1,0 +1,52 @@
+﻿@model RegisterModel
+
+<h1>Kayıt ol</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row mb-2">
+                <label asp-for="FirstName" class="col-md-4 col-form-label"></label>
+                <div class="col-md-8">
+                    <input class="form-control" asp-for="FirstName" />
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="LastName" class="col-md-4 col-form-label"></label>
+                <div class="col-md-8">
+                    <input class="form-control" asp-for="LastName" />
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="UserName" class="col-md-4 col-form-label"></label>
+                <div class="col-md-8">
+                    <input class="form-control" asp-for="UserName" />
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="Email" class="col-md-4 col-form-label"></label>
+                <div class="col-md-8">
+                    <input class="form-control" asp-for="Email" />
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="Password" class="col-md-4 col-form-label"></label>
+                <div class="col-md-8">
+                    <input class="form-control" asp-for="Password" />
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="RePassword" class="col-md-4 col-form-label"></label>
+                <div class="col-md-8">
+                    <input class="form-control" asp-for="RePassword" />
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <div class="col-md-8 offset-4">
+                    <button type="submit" class="btn btn-primary"> Kaydol </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
